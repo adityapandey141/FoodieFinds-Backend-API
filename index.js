@@ -3,10 +3,10 @@ const { resolve } = require('path');
 
 const app = express();
 const port = 3010;
-let cors = require('cors');
 let sqlite3 = require('sqlite3').verbose();
 let { open } = require('sqlite');
 app.use(express.static('static'));
+let cors = require('cors');
 app.use(cors());
 
 let db;
@@ -180,7 +180,6 @@ async function getDishesByPrice() {
   return { restaurants: response };
 }
 app.get('/dishes/sort-by-price', async (req, res) => {
-  let isVeg = req.query.isVeg;
   try {
     let result = await getDishesByPrice();
     if (result.restaurants.length === 0) {
